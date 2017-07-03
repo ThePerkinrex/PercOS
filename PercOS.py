@@ -14,8 +14,7 @@ state = 0
 
 uFileName = "Users.prc"
 
-dire = "PercOS_filesystem/users/"
-seen_dire = "/users/"
+dir = Utils.Dire("PercOS_filesystem","users")
 
 # Init Messages
 version = "Alpha 1.1.2"
@@ -48,6 +47,9 @@ for line in usersFileLines:
     if args[2] == '0':
         normalusers.append(args[0])
 
+usr = ""
+pas = ""
+
 if len(users) == 0:
 
     # there are no users, first start menu
@@ -62,7 +64,11 @@ if len(users) == 0:
         print("Contraseña: " + pas)
         c = Utils.getProbedInput("Es esto correcto?(Y/n)", ["y","n"])
         if c == "y":
-            Utils.writeUsers([usr], [pas], [usr])
+            users.append(usr)
+            pases.append(pas)
+            perms.append('1')
+            superusers.append(usr)
+            Utils.writeUsers(users, pases, superusers)
 
 else:
 
@@ -88,11 +94,13 @@ else:
                 print("Hola " + usr)
                 if usr in superusers:
                     print(usr + ' - Eres administrador')
-            dire = dire + usr + '/'
+                dire = dire + usr + '/'
+            break
         else:
             print("Incorrecto")
             tries += 1
 
+dir = Utils.Dire("PercOS_filesystem", "users", usr)
 
 # Main Loop
 
@@ -100,9 +108,9 @@ while True:
     if state == 0:
         comm = ''
         if usr == '':
-            comm = input("devUser " + dire + " >> ")
+            comm = input(dir.dir + " >> ")
         else:
-            comm = input(usr + " " + dire + " >> ")
+            comm = input(dir.dir + " >> ")
         # Command detection
         
         if comm == "help":
@@ -125,11 +133,11 @@ while True:
             else:
                 print('No tienes suficientes permisos para hacer esto')
             continue
-        elif comm == "mkFile":
-            print('add filename extension (.txt .py)')
-            filename = dire + input(' Filename > ')
-            Utils.mkFile(filename)
-            continue
+        #elif comm == "mkFile":
+        #    print('add filename extension (.txt .py)')
+        #    filename = dire + input(' Filename > ')
+        #    Utils.mkFile(filename)
+        #    continue
         elif comm == "mkAdmin":
             if usr in superusers:
                 print('Cambiando permisos')
