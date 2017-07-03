@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
-#PercOS Main Script
+# PercOS Main Script
 
-#Setup
+# TODO: command class for creating commands more easily
+# TODO: command getter for modules in /bin folder
+
+# Setup
 import PercOSApps as Apps
 import PercOSUtils as Utils
 import AlgebraMathForPercOS as AMath
@@ -14,14 +17,14 @@ uFileName = "Users.prc"
 dire = "PercOS_filesystem/users/"
 seen_dire = "/users/"
 
-#Init Messages
+# Init Messages
 version = "Alpha 1.1.2"
 print(Utils.decor("PercOS " + version, 60))
 Utils.printInit()
 Apps.printInit()
 AMath.printInit()
 
-#reding the users, passwords and permissions file
+# reading the users, passwords and permissions file
 
 usersFile = open(uFileName,'r')
 usersFileLines = usersFile.readlines()
@@ -44,36 +47,54 @@ for line in usersFileLines:
         superusers.append(args[0])
     if args[2] == '0':
         normalusers.append(args[0])
-        
-#asking the user for credentials
 
-tries = 0;
-while tries<3:
-    print("Tienes " + (3-tries) + " intentos.\n")
-    usr = input("Nombre de usuario: ")
-    pas = input("       Contraseña: ")
-    found = False
-    for i in range(len(users)):
-        if usr == users[i] and pas == pases[i]:
-            found = True
-            break
-    if found:
-        if usr == '':
-            print("Hola devUser")
-            if usr in superusers:
-                print('devUser - Eres administrador')
-            dire = dire + 'dev/'
-        else:
-            print("Hola " + usr)
-            if usr in superusers:
-                print(usr + ' - Eres administrador')
+if len(users) == 0:
+
+    # there are no users, first start menu
+
+    print("No hay usuarios registrados, creando el usuario inicial, que será admin")
+
+    usr = input(" Nombre de usuario: ")
+    pas = input("        Contraseña: ")
+    double_pas = input("Repetir contraseña: ")
+    if double_pas == pas:
+        print("   Usuario: " + usr)
+        print("Contraseña: " + pas)
+        c = Utils.getProbedInput("Es esto correcto?(Y/n)", ["y","n"])
+        if c == "y":
+            Utils.writeUsers([usr], [pas], [usr])
+
+else:
+
+    # asking the user for credentials
+
+    tries = 0;
+    while tries<3:
+        print("Tienes " + (3-tries) + " intentos.\n")
+        usr = input("Nombre de usuario: ")
+        pas = input("       Contraseña: ")
+        found = False
+        for i in range(len(users)):
+            if usr == users[i] and pas == pases[i]:
+                found = True
+                break
+        if found:
+            if usr == '':
+                print("Hola devUser")
+                if usr in superusers:
+                    print('devUser - Eres administrador')
+                dire = dire + 'dev/'
+            else:
+                print("Hola " + usr)
+                if usr in superusers:
+                    print(usr + ' - Eres administrador')
             dire = dire + usr + '/'
-    else:
-        print("Incorrecto")
-        tries += 1
+        else:
+            print("Incorrecto")
+            tries += 1
 
 
-#Main Loop
+# Main Loop
 
 while True:
     if state == 0:
@@ -82,7 +103,7 @@ while True:
             comm = input("devUser " + dire + " >> ")
         else:
             comm = input(usr + " " + dire + " >> ")
-        #Command detection
+        # Command detection
         
         if comm == "help":
             Utils.printHelp()
