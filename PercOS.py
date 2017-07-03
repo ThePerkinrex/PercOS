@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 #PercOS Main Script
 
 #Setup
@@ -47,27 +47,31 @@ for line in usersFileLines:
         
 #asking the user for credentials
 
-usr = input("Nombre de usuario: ")
-pas = input("       Contrasena: ")
-found = False
-for i in range(len(users)):
-    if usr == users[i] and pas == pases[i]:
-        found = True
-        break
-if found:
-    if usr == '':
-        print("Hola devUser")
-        if usr in superusers:
-            print('devUser - Eres administrador')
-        dire = dire + 'dev/'
+tries = 0;
+while tries<3:
+    print("Tienes " + (3-tries) + " intentos.\n")
+    usr = input("Nombre de usuario: ")
+    pas = input("       Contraseña: ")
+    found = False
+    for i in range(len(users)):
+        if usr == users[i] and pas == pases[i]:
+            found = True
+            break
+    if found:
+        if usr == '':
+            print("Hola devUser")
+            if usr in superusers:
+                print('devUser - Eres administrador')
+            dire = dire + 'dev/'
+        else:
+            print("Hola " + usr)
+            if usr in superusers:
+                print(usr + ' - Eres administrador')
+            dire = dire + usr + '/'
     else:
-        print("Hola " + usr)
-        if usr in superusers:
-            print(usr + ' - Eres administrador')
-        dire = dire + usr + '/'
-else:
-    print("Incorrecto")
-    state = 2
+        print("Incorrecto")
+        tries += 1
+
 
 #Main Loop
 
