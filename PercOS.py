@@ -9,12 +9,13 @@ import PercOSApps as Apps
 import PercOSUtils as Utils
 import AlgebraMathForPercOS as AMath
 from time import gmtime, strftime
+import os
 
 state = 0
 
 uFileName = "Users.prc"
 
-dir = Utils.Dire("PercOS_filesystem","users")
+#dir = Utils.Dire("PercOS_filesystem","users")
 
 # Init Messages
 version = "Alpha 1.1.2"
@@ -49,6 +50,7 @@ for line in usersFileLines:
 
 usr = ""
 pas = ""
+nUsr = False
 
 if len(users) == 0:
 
@@ -56,6 +58,7 @@ if len(users) == 0:
 
     print("No hay usuarios registrados, creando el usuario inicial, que será admin")
 
+    # FIXME add a loop here
     usr = input(" Nombre de usuario: ")
     pas = input("        Contraseña: ")
     double_pas = input("Repetir contraseña: ")
@@ -69,14 +72,16 @@ if len(users) == 0:
             perms.append('1')
             superusers.append(usr)
             Utils.writeUsers(users, pases, superusers)
+            nUsr = True
+
 
 else:
 
     # asking the user for credentials
 
-    tries = 0;
-    while tries<3:
-        print("Tienes " + (3-tries) + " intentos.\n")
+    tries = 3;
+    while tries>0:
+        print("Tienes " + tries.__str__() + " intentos.\n")
         usr = input("Nombre de usuario: ")
         pas = input("       Contraseña: ")
         found = False
@@ -89,18 +94,26 @@ else:
                 print("Hola devUser")
                 if usr in superusers:
                     print('devUser - Eres administrador')
-                dire = dire + 'dev/'
+                #dire = dire + 'dev/'
             else:
                 print("Hola " + usr)
                 if usr in superusers:
                     print(usr + ' - Eres administrador')
-                dire = dire + usr + '/'
+                #dire = dire + usr + '/'
             break
         else:
             print("Incorrecto")
-            tries += 1
+            tries -= 1
 
-dir = Utils.Dire("PercOS_filesystem", "users", usr)
+dir = Utils.Dire
+
+if usr == '':
+    dir = Utils.Dire("PercOS_filesystem", "users", 'dev')
+else:
+    dir = Utils.Dire("PercOS_filesystem", "users", usr)
+
+if nUsr == True:
+    os.mkdir(dir.realdir)
 
 # Main Loop
 
@@ -130,6 +143,7 @@ while True:
                 users.append(nUsr)
                 pases.append(nPas)
                 Utils.writeUsers(users, pases, superusers)
+                os.mkdir(dir.realdir)
             else:
                 print('No tienes suficientes permisos para hacer esto')
             continue
