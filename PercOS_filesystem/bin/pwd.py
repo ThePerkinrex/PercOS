@@ -1,4 +1,4 @@
-from PercOSApps import Command
+from PercOS_filesystem.bin.command import Command
 
 
 def getcomm():

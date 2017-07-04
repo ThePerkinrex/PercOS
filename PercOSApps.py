@@ -4,8 +4,8 @@
 #Setup
 import random
 import PercOSUtils as Utils
-import os
-import glob
+from PercOS_filesystem.bin import inherit
+import importlib
 
 
 #Init Message
@@ -101,7 +101,7 @@ def ballsGame(user):
 
 def comm(command, usr, dire):
 
-    loadcommands(dire)
+    loadcommands()
     r = True
     if command == "calculator" or command == "calc":
             print("Abriendo la calculadora")
@@ -111,32 +111,16 @@ def comm(command, usr, dire):
     elif command == "balls":
             ballsGame(usr)
     else:
-        print('Perdona pero ese comando es un error de codigo y se arreglara en la prox. version')
         r = False
     return r
 
 
-def loadcommands(dire):
+def loadcommands():
 
-    for file in glob.glob(os.path.join(dire.bd + "/bin/", "*.py")):
-        name = os.path.splitext(os.path.basename(file))[0]
-        modul = __import__(name)
-        print(modul.getcomm().name)
-        for member in dir(modul):
-            print(member)
-
-
-class Command:
-    name = None
-    desc = None
-    author = None
-
-    @staticmethod
-    def call(dire, args):
-        print("This command hasn't been implemented yet,\n if you think this is an error contact the command author")
-        print("Current dir: " + dire.dir)
-        if not (args is None or args == ''):
-            print("Some arguments were in the call: " + args)
+    for cls in inherit.inheritors():
+        print("  Name: " + cls.name)
+        print("  Desc: " + cls.desc)
+        print("Author: " + cls.author)
 
 
 
