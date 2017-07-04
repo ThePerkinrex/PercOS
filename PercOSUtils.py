@@ -16,7 +16,7 @@ def decor(st, m):
 
 #Init Message
 def printInit():
-    version = "Alpha 1.0.4"
+    version = "Alpha 1.1.0"
     print(decor("PercOS Utils " + version, 1))
 
 #Help message

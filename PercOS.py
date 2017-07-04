@@ -18,7 +18,7 @@ uFileName = "Users.prc"
 #dir = Utils.Dire("PercOS_filesystem","users")
 
 # Init Messages
-version = "Alpha 1.1.2"
+version = "Alpha 1.2.0"
 print(Utils.decor("PercOS " + version, 60))
 Utils.printInit()
 Apps.printInit()
