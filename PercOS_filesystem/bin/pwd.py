@@ -7,9 +7,9 @@ def getcomm():
 
 class Pwd(Command):
     name = "pwd"
-    desc = "This command prints out the current directory"
+    desc = "muestra la carpeta en la que se encuentra el usuario"
     author = "ThePerkinrex"
 
     @staticmethod
-    def call(dire, args):
+    def call(dire, usr, args=None):
         print(dire.dir)

@@ -101,7 +101,7 @@ def ballsGame(user):
 
 def comm(command, usr, dire):
 
-    loadcommands()
+    #loadcommands()
     r = True
     if command == "calculator" or command == "calc":
             print("Abriendo la calculadora")
@@ -111,16 +111,20 @@ def comm(command, usr, dire):
     elif command == "balls":
             ballsGame(usr)
     else:
-        r = False
+        if not loadcommands(command, dire, usr):
+            r = False
     return r
 
 
-def loadcommands():
+def loadcommands(comm, dire, usr):
 
     for cls in inherit.inheritors():
-        print("  Name: " + cls.name)
-        print("  Desc: " + cls.desc)
-        print("Author: " + cls.author)
+        if comm == cls.name:
+            #print("Author: " + cls.author + "\n")
+            cls.call(dire, usr)
+            return True
+
+    return False
 
 
 

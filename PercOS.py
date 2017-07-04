@@ -121,9 +121,9 @@ while True:
     if state == 0:
         comm = ''
         if usr == '':
-            comm = input(dire.dir + " >> ")
+            comm = input("devUser >> ")
         else:
-            comm = input(dire.dir + " >> ")
+            comm = input(usr + " >> ")
         # Command detection
         
         if comm == "help":

@@ -2,9 +2,10 @@
 #PercOS Utils
 
 #Setup
-import AlgebraMathForPercOS as AMath
 import distutils.file_util as FUtil
 import os
+
+from PercOS_filesystem.bin import inherit
 
 uFileName = "Users.prc"
 
@@ -19,6 +20,14 @@ def printInit():
     version = "Alpha 1.1.0"
     print(decor("PercOS Utils " + version, 1))
 
+def getHelpMsgs():
+    msgs = []
+    for cls in inherit.inheritors():
+        msg = cls.name + " > " + cls.desc + " - Comando hecho por " + cls.author
+        msgs.append(msg)
+
+    return msgs
+
 #Help message
 def printHelp():
     print("Lista de comandos")
@@ -30,9 +39,11 @@ def printHelp():
     print("mkUser > crea un usuario (si el usuario es admin.)")
     print("mkAdmin > cambia los permios de un usuario (si el usuario es admin.)")
     print("time > imprime la fecha y la hora")
+    for msg in getHelpMsgs():
+        print(msg)
     print("help > muestra este mensaje de ayuda")
 
-#Advanced input functions
+# Advanced input functions
 def getProbedInput(prompt, accepted):
     while True:
         value = input(prompt).lower()
@@ -41,6 +52,7 @@ def getProbedInput(prompt, accepted):
             return value
         else:
             print(value + ' no es una respuesta valida.')
+
 
 def getProbedInputNormal(prompt, accepted):
     while True:
@@ -51,7 +63,7 @@ def getProbedInputNormal(prompt, accepted):
         else:
             print(value + ' no es una respuesta valida.')
 
-#Function for writing to the users.txt file
+#Function for writing to the users.prc file
 def writeUsers(users, pases, superusers):
     f = open(uFileName, 'w')
     for user in users:
