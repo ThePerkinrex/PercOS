@@ -10,7 +10,7 @@ commands = ['calulator', 'calc', 'upDown', 'balls']
 
 #Init Message
 def printInit():
-    version = "Alpha 1.1"
+    version = "Alpha 1.1.0"
     print(Utils.decor("PercOS Apps " + version, 1))
 
 
