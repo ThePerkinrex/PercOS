@@ -105,15 +105,15 @@ else:
             print("Incorrecto")
             tries -= 1
 
-dir = Utils.Dire
+dire = Utils.Dire
 
 if usr == '':
-    dir = Utils.Dire("PercOS_filesystem", "users", 'dev')
+    dire = Utils.Dire("PercOS_filesystem", "users", 'dev')
 else:
-    dir = Utils.Dire("PercOS_filesystem", "users", usr)
+    dire = Utils.Dire("PercOS_filesystem", "users", usr)
 
-if nUsr == True:
-    os.mkdir(dir.realdir)
+if nUsr:
+    os.mkdir(dire.realdir)
 
 # Main Loop
 
@@ -121,9 +121,9 @@ while True:
     if state == 0:
         comm = ''
         if usr == '':
-            comm = input(dir.dir + " >> ")
+            comm = input(dire.dir + " >> ")
         else:
-            comm = input(dir.dir + " >> ")
+            comm = input(dire.dir + " >> ")
         # Command detection
         
         if comm == "help":
@@ -143,7 +143,7 @@ while True:
                 users.append(nUsr)
                 pases.append(nPas)
                 Utils.writeUsers(users, pases, superusers)
-                os.mkdir(dir.realdir)
+                os.mkdir(dire.realdir)
             else:
                 print('No tienes suficientes permisos para hacer esto')
             continue
@@ -183,13 +183,13 @@ while True:
                 else:
                     print('devUser ' + perms[i])
             continue
-        elif comm in Apps.commands:
-            Apps.comm(comm)
-            continue
         elif comm == "":
             continue
         else:
-            print(comm + " no es un comando valido")
+            r = Apps.comm(comm, usr, dire)
+
+            if not r:
+                print(comm + " no es un comando valido")
             continue
     
     elif state == 2:
