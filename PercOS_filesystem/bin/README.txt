@@ -1,0 +1,12 @@
+PLEASE DON'T DELETE THESE FILES:
+- __init__.py
+- command.py
+- inherit.py
+WITHOUT THESE FILES PERCOS WILL GIVE OUT ERRORS
+
+THE ONLY FILES YOU CAN CHANGE ARE THE ONES NOT LISTED ABOVE
+
+FOR MORE HELP LOOK AT THE GITHUB REPOSITORY AND WIKI
+
+https://github.com/ThePerkinrex/PercOS
+https://github.com/ThePerkinrex/PercOS/wiki
