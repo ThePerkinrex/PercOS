@@ -125,12 +125,14 @@ def callcomm(comm):
             isSU = Utils.getProbedInput('Quieres que sea admin? (Y/n) ', ['y', 'n'])
             if isSU == 'y':
                 superusers.append(nUsr)
+                perms.append('1')
             else:
                 normalusers.append(nUsr)
+                perms.append('0')
             users.append(nUsr)
             pases.append(nPas)
             Utils.writeUsers(users, pases, superusers)
-            os.mkdir(dire.realdir)
+            os.mkdir(Utils.Dire("PercOS_filesystem", "users", nUsr).realdir)
         else:
             print('No tienes suficientes permisos para hacer esto')
         return 0
@@ -191,7 +193,10 @@ while True:
             comm = input(usr + " >> ")
         # Command detection
 
-        callcomm(comm)
+        commout = callcomm(comm)
+
+        if commout == 1:
+            break
 
     elif state == 2:
         break
