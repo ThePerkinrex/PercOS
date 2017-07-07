@@ -7,7 +7,7 @@ import os
 
 from PercOS_filesystem.bin import inherit
 
-uFileName = "Users.prc"
+uFileName = "Users.prcdat"
 
 #Function for decoring messages
 def decor(st, m):

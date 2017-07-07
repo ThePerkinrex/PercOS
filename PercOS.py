@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 # PercOS Main Script
 
-# TODO: command class for creating commands more easily
-# TODO: command getter for modules in /bin folder
-
 # Setup
 import PercOSApps as Apps
 import PercOSUtils as Utils
@@ -13,7 +10,7 @@ import os
 
 state = 0
 
-uFileName = "Users.prc"
+uFileName = "Users.prcdat"
 
 #dir = Utils.Dire("PercOS_filesystem","users")
 
@@ -114,6 +111,74 @@ else:
 
 if nUsr:
     os.mkdir(dire.realdir)
+        
+def callcomm(comm):
+    if comm == "help":
+        Utils.printHelp()
+        return 0
+    elif comm == "mkUser":
+        if usr in superusers:
+            print('Creando nuevo usuario')
+            print('')
+            nUsr = input('Nombre de usuario >> ')
+            nPas = input('       Contrasena >> ')
+            isSU = Utils.getProbedInput('Quieres que sea admin? (Y/n) ', ['y', 'n'])
+            if isSU == 'y':
+                superusers.append(nUsr)
+            else:
+                normalusers.append(nUsr)
+            users.append(nUsr)
+            pases.append(nPas)
+            Utils.writeUsers(users, pases, superusers)
+            os.mkdir(dire.realdir)
+        else:
+            print('No tienes suficientes permisos para hacer esto')
+        return 0
+    # elif comm == "mkFile":
+    #    print('add filename extension (.txt .py)')
+    #    filename = dire + input(' Filename > ')
+    #    Utils.mkFile(filename)
+    #    return 0
+    elif comm == "mkAdmin":
+        if usr in superusers:
+            print('Cambiando permisos')
+            nUsr = Utils.getProbedInputNormal('Nombre de usuario >> ', users)
+            isSU = Utils.getProbedInput('Quieres que sea admin? (Y/n) ', ['y', 'n'])
+            if isSU == 'y':
+                if nUsr not in superusers:
+                    superusers.append(nUsr)
+                    normalusers.remove(nUsr)
+            else:
+                if nUsr not in normalusers:
+                    normalusers.append(nUsr)
+                    superusers.remove(nUsr)
+            Utils.writeUsers(users, pases, superusers)
+        else:
+            print('No tienes suficientes permisos para hacer esto')
+        return 0
+    elif comm == "end":
+        print("Terminando PercOS")
+        return 1
+    elif comm == "time":
+        print(strftime("%a, %d %b %Y %H:%M:%S", gmtime()))
+        return 0
+    elif comm == "userPerms":
+        for user in users:
+            i = users.index(user)
+            if not user == '':
+                print(user + ' ' + perms[i])
+            else:
+                print('devUser ' + perms[i])
+        return 0
+    elif comm == "":
+        return 0
+    else:
+        r = Apps.comm(comm, usr, dire)
+
+        if not r:
+            print(comm + " no es un comando valido")
+        return 0
+
 
 # Main Loop
 
@@ -125,72 +190,8 @@ while True:
         else:
             comm = input(usr + " >> ")
         # Command detection
-        
-        if comm == "help":
-            Utils.printHelp()
-            continue
-        elif comm == "mkUser":
-            if usr in superusers:
-                print('Creando nuevo usuario')
-                print('')
-                nUsr = input('Nombre de usuario >> ')
-                nPas = input('       Contrasena >> ')
-                isSU = Utils.getProbedInput('Quieres que sea admin? (Y/n) ', ['y', 'n'])
-                if isSU == 'y':
-                    superusers.append(nUsr)
-                else:
-                    normalusers.append(nUsr)
-                users.append(nUsr)
-                pases.append(nPas)
-                Utils.writeUsers(users, pases, superusers)
-                os.mkdir(dire.realdir)
-            else:
-                print('No tienes suficientes permisos para hacer esto')
-            continue
-        #elif comm == "mkFile":
-        #    print('add filename extension (.txt .py)')
-        #    filename = dire + input(' Filename > ')
-        #    Utils.mkFile(filename)
-        #    continue
-        elif comm == "mkAdmin":
-            if usr in superusers:
-                print('Cambiando permisos')
-                nUsr = Utils.getProbedInputNormal('Nombre de usuario >> ', users)
-                isSU = Utils.getProbedInput('Quieres que sea admin? (Y/n) ', ['y', 'n'])
-                if isSU == 'y':
-                    if nUsr not in superusers:
-                        superusers.append(nUsr)
-                        normalusers.remove(nUsr)
-                else:
-                    if nUsr not in normalusers:
-                        normalusers.append(nUsr)
-                        superusers.remove(nUsr)
-                Utils.writeUsers(users, pases, superusers)
-            else:
-                print('No tienes suficientes permisos para hacer esto')
-            continue
-        elif comm == "end":
-            print("Terminando PercOS")
-            break
-        elif comm == "time":
-            print(strftime("%a, %d %b %Y %H:%M:%S", gmtime()))
-            continue
-        elif comm == "userPerms":
-            for user in users:
-                i = users.index(user)
-                if not user == '':
-                    print(user + ' ' + perms[i])
-                else:
-                    print('devUser ' + perms[i])
-            continue
-        elif comm == "":
-            continue
-        else:
-            r = Apps.comm(comm, usr, dire)
 
-            if not r:
-                print(comm + " no es un comando valido")
-            continue
-    
+        callcomm(comm)
+
     elif state == 2:
         break

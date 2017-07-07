@@ -1,3 +1,5 @@
+# README
+
 PLEASE DON'T DELETE THESE FILES:
 - __init__.py
 - command.py
