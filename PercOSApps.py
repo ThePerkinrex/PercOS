@@ -119,9 +119,11 @@ def comm(command, usr, dire):
 def loadcommands(comm, dire, usr):
 
     for cls in inherit.inheritors():
-        if comm == cls.name:
+        args = comm.split(" ")
+        if args[0] == cls.name:
             #print("Author: " + cls.author + "\n")
-            cls.call(dire, usr)
+            args.remove(args[0])
+            cls.call(dire, usr, args)
             return True
 
     return False
