@@ -7,6 +7,7 @@ class Help(Command):
     name = "help"
     desc = "Shows this help message"
     author = "ThePerkinrex"
+    usage = "help"
 
     @staticmethod
     def getHelpMsgs():
@@ -25,7 +26,7 @@ class Help(Command):
         print("upDown > opens the game UpDown")
         print("balls > opens the game Balls")
         print("end > ends the os")
-        print("mkUser > creates an users (if the user is admin)")
+        print("*mkUser > creates an users (if the user is admin)")
         print("mkAdmin > Changes user rights (if the user is admin)")
         print("time > Prints the date and time")
         for msg in Help.getHelpMsgs():

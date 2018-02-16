@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3
 # -*- coding: utf-8 -*-
 # PercOS Main Script
 
@@ -39,7 +40,7 @@ for line in usersFileLines:
     users.append(args[0])
     pases.append(args[1])
     perms.append(args[2])
-    
+
     if args[2] == '1':
         superusers.append(args[0])
     if args[2] == '0':
@@ -111,12 +112,9 @@ else:
 
 if nUsr:
     os.mkdir(dire.realdir)
-        
+
 def callcomm(comm):
-    if comm == "help":
-        Utils.printHelp()
-        return 0
-    elif comm == "mkUser":
+    if comm == "mkUsero":
         if usr in superusers:
             print('Creando nuevo usuario')
             print('')
