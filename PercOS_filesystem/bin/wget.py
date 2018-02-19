@@ -1,6 +1,6 @@
 import urllib.request
 
-from PercOS_filesystem.bin.command import Command
+from command import Command
 
 
 class Wget(Command):

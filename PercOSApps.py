@@ -4,8 +4,12 @@
 #Setup
 import random
 import PercOSUtils as Utils
-from PercOS_filesystem.bin import inherit
-import importlib
+import inherit
+# Setup
+import random
+
+import PercOSUtils as Utils
+import inherit
 
 
 #Init Message
@@ -117,7 +121,6 @@ def comm(command, usr, dire):
 
 
 def loadcommands(comm, dire, usr):
-
     for cls in inherit.inheritors():
         args = comm.split(" ")
         if args[0] == cls.name:

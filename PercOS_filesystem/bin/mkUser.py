@@ -1,7 +1,12 @@
-from PercOS_filesystem.bin.command import Command
+from command import Command
 import PercOSUtils as Utils
 #import PercOS as p
 import os
+# import PercOS as p
+import os
+
+import PercOSUtils as Utils
+from command import Command
 
 
 class MkUser(Command):

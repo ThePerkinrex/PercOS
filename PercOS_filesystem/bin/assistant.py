@@ -1,4 +1,4 @@
-from PercOS_filesystem.bin.command import Command
+from command import Command
 
 
 class Assistant(Command):

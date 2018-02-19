@@ -5,8 +5,6 @@
 import distutils.file_util as FUtil
 import os
 
-from PercOS_filesystem.bin import inherit
-
 uFileName = "Users.prcdat"
 
 #Function for decoring messages

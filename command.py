@@ -1,7 +1,7 @@
 class Command:
     name = None
     desc = None
-    usage = "The usage for tis command hasn't been implemented yet"
+    usage = "The usage for this command hasn't been implemented yet"
     author = None
 
     @staticmethod

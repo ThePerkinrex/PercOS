@@ -1,5 +1,5 @@
-from PercOS_filesystem.bin import inherit
-from PercOS_filesystem.bin.command import Command
+import inherit
+from command import Command
 
 
 class Usage(Command):
