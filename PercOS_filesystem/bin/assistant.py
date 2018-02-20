@@ -7,7 +7,6 @@ class Assistant(Command):
     author = "ThePerkinrex"
     usage = "assistant [question]"
 
-    @staticmethod
-    def call(dire, usr, args=None):
+    def call(self, args=None):
         print("this is my assistant")
 

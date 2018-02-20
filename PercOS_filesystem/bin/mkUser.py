@@ -1,12 +1,6 @@
 from command import Command
 import PercOSUtils as Utils
-#import PercOS as p
 import os
-# import PercOS as p
-import os
-
-import PercOSUtils as Utils
-from command import Command
 
 
 class MkUser(Command):
@@ -15,14 +9,14 @@ class MkUser(Command):
     author = "ThePerkinrex"
     usage = "mkUser"
 
-    @staticmethod
-    def call(dire, usr, args=None):
-        if usr in p.superusers:
-            print('Creando nuevo usuario')
+    def call(self, args=None):
+        p = self.getUsersInfo()
+        if p is not None:
+            print('Creating new user')
             print('')
-            nUsr = input('Nombre de usuario >> ')
-            nPas = input('       Contrasena >> ')
-            isSU = Utils.getProbedInput('Quieres que sea admin? (Y/n) ', ['y', 'n'])
+            nUsr = input('Username >> ')
+            nPas = input('Password >> ')
+            isSU = Utils.getProbedInput('Do you want to make admin? (Y/n) ', ['y', 'n'])
             if isSU == 'y':
                 p.superusers.append(nUsr)
                 p.perms.append('1')
@@ -31,8 +25,10 @@ class MkUser(Command):
                 p.perms.append('0')
             p.users.append(nUsr)
             p.pases.append(nPas)
-            Utils.writeUsers(users, pases, superusers)
+            Utils.writeUsers(p.users, p.pases, p.superusers)
             os.mkdir(Utils.Dire("PercOS_filesystem", "users", nUsr).realdir)
+            self.setUsersInfo(p)
         else:
-            print('No tienes suficientes permisos para hacer esto')
+            print("You don't have enough permissions to perform this")
         return 0
+        pass

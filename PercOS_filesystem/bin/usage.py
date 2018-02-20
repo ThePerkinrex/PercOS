@@ -8,8 +8,7 @@ class Usage(Command):
     usage = "usage [command]"
     author = "ThePerkinrex"
 
-    @staticmethod
-    def call(dire, usr, args=None):
+    def call(self, args=None):
         if len(args) == 0:
             print("------- USAGES -------")
             for cls in inherit.inheritors():

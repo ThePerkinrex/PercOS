@@ -103,7 +103,7 @@ def ballsGame(user):
 # Apps command detection
 
 
-def comm(command, usr, dire):
+def comm(command, usr, dire, percos):
 
     #loadcommands()
     r = True
@@ -115,18 +115,20 @@ def comm(command, usr, dire):
     elif command == "balls":
             ballsGame(usr)
     else:
-        if not loadcommands(command, dire, usr):
+        if not loadcommands(command, dire, usr, percos):
             r = False
     return r
 
 
-def loadcommands(comm, dire, usr):
+def loadcommands(comm, dire, usr, percos):
     for cls in inherit.inheritors():
         args = comm.split(" ")
         if args[0] == cls.name:
             #print("Author: " + cls.author + "\n")
             args.remove(args[0])
-            cls.call(dire, usr, args)
+            c = cls(dire, usr, percos)
+            c.call(args)
+            del c
             return True
 
     return False

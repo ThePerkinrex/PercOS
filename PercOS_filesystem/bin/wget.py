@@ -9,9 +9,8 @@ class Wget(Command):
     usage = "wget <url> [filename]"
     author = "ThePerkinrex"
 
-    @staticmethod
-    def call(dire, usr, args=None):
-        if args == None or len(args) == 0:
+    def call(self, args=None):
+        if args is None or len(args) == 0:
             print("I need at least the url to work")
         else:
             url = args[0]
@@ -24,7 +23,7 @@ class Wget(Command):
                 filename = args[1]
                 print("filename specified")
                 print("downloading as " + filename)
-            f = open(dire.realdir + "/" + filename, 'w')
+            f = open(self.dire.realdir + "/" + filename, 'w')
             f.write(Wget.getINetTextFile(url))
             f.flush()
             f.close()

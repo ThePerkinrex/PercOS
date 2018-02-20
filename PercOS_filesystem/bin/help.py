@@ -18,8 +18,7 @@ class Help(Command):
 
         return msgs
 
-    @staticmethod
-    def call(dire, usr, args=None):
+    def call(self, args=None):
         print("Command list")
         print("If the command has an asterisk, it's invalid")
         print("calculator > opens the calculator, you can also use 'calc'")

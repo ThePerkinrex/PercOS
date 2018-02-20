@@ -7,6 +7,5 @@ class Pwd(Command):
     author = "ThePerkinrex"
     usage = "pwd"
 
-    @staticmethod
-    def call(dire, usr, args=None):
-        print(dire.dir)
+    def call(self, args=None):
+        print(self.dire.dir)
