@@ -107,6 +107,26 @@ class PercOS:
         if self.nUsr:
             os.mkdir(dire.realdir)
 
+    def getUsersInfo(self):
+        r = None
+        print(self.usr, p.superusers)
+        if self.usr in p.superusers:
+            r = UsersInfo(self.users, self.pases, self.superusers, self.normalusers, self.perms)
+        else:
+            print('You can\'t do that')
+        return r
+
+    def setUsersInfo(self, usersinfo):
+        r = None
+        if self.usr in self.superusers:
+            self.superusers = usersinfo.superusers
+            self.users = usersinfo.users
+            self.normalusers = usersinfo.normalusers
+            self.pases = usersinfo.pases
+            self.perms = usersinfo.perms
+        else:
+            print('You can\'t do that')
+
     def callcomm(self, comm):
         if comm == "mkUsero":
             pass

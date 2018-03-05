@@ -1,4 +1,3 @@
-import PercOS
 
 class UsersInfo:
     def __init__(self, users, pases, superusers, normalusers, perms):
@@ -26,20 +25,7 @@ class Command:
             print("Some arguments were in the call: " + args)
 
     def getUsersInfo(self):
-        r = None
-        p = self.percos
-        print(self.usr, p.superusers)
-        if self.usr in p.superusers:
-            r = UsersInfo(p.users, p.pases, p.superusers, p.normalusers, p.perms)
-        return r
+        return percos.getUsersInfo()
 
     def setUsersInfo(self, usersinfo):
-        r = None
-        p = self.percos
-        if self.usr in p.superusers:
-            p.superusers = usersinfo.superusers
-            p.users = usersinfo.users
-            p.normalusers = usersinfo.normalusers
-            p.pases = usersinfo.pases
-            p.perms = usersinfo.perms
-            print(p.users, usersinfo.users)
+        return p.setUsersInfo(usersinfo)
