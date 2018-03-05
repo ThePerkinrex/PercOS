@@ -127,33 +127,7 @@ class PercOS:
             print('You can\'t do that')
 
     def callcomm(self, comm):
-        if comm == "mkUsero":
-            pass
-            # if self.usr in self.superusers:
-            #     print('Creando nuevo usuario')
-            #     print('')
-            #     nUsr = input('Nombre de usuario >> ')
-            #     nPas = input('       Contrasena >> ')
-            #     isSU = Utils.getProbedInput('Quieres que sea admin? (Y/n) ', ['y', 'n'])
-            #     if isSU == 'y':
-            #         self.superusers.append(nUsr)
-            #         self.perms.append('1')
-            #     else:
-            #         self.normalusers.append(nUsr)
-            #         self.perms.append('0')
-            #     self.users.append(nUsr)
-            #     self.pases.append(nPas)
-            #     Utils.writeUsers(self.users, self.pases, self.superusers)
-            #     os.mkdir(Utils.Dire("PercOS_filesystem", "users", nUsr).realdir)
-            # else:
-            #     print('No tienes suficientes permisos para hacer esto')
-            # return 0
-        # elif comm == "mkFile":
-        #    print('add filename extension (.txt .py)')
-        #    filename = dire + input(' Filename > ')
-        #    Utils.mkFile(filename)
-        #    return 0
-        elif comm == "mkAdmin":
+        if comm == "mkAdmin":
             if self.usr in self.superusers:
                 print('Changing permissions')
                 nUsr = Utils.getProbedInputNormal('Username >> ', self.users)
@@ -170,9 +144,6 @@ class PercOS:
             else:
                 print('You don\'t have enough permissions to do it')
             return 0
-        #elif comm == "end":
-        #    print("Endnig PercOS")
-        #    return 1
         elif comm == "userPerms":
             for user in self.users:
                 i = self.users.index(user)
