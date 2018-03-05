@@ -7,7 +7,6 @@ import PercOSApps as Apps
 import PercOSUtils as Utils
 from command import UsersInfo
 import AlgebraMathForPercOS as AMath
-from time import gmtime, strftime
 import os
 
 
@@ -169,14 +168,11 @@ class PercOS:
                         self.superusers.remove(nUsr)
                 Utils.writeUsers(self.users, self.pases, self.superusers)
             else:
-                print('You don\'t have enough permissions to do it)
+                print('You don\'t have enough permissions to do it')
             return 0
-        elif comm == "end":
-            print("Endnig PercOS")
-            return 1
-        elif comm == "time":
-            print(strftime("%a, %d %b %Y %H:%M:%S", gmtime()))
-            return 0
+        #elif comm == "end":
+        #    print("Endnig PercOS")
+        #    return 1
         elif comm == "userPerms":
             for user in self.users:
                 i = self.users.index(user)
@@ -190,9 +186,9 @@ class PercOS:
         else:
             r = Apps.comm(comm, self.usr, self.dire, self)
 
-            if not r:
+            if not r[0]:
                 print(comm + " is not a valid command")
-            return 0
+            return r[1]
 
     # Main Loop
     def main(self):

@@ -6,7 +6,7 @@ import os
 class MkUser(Command):
     name = "mkUser"
     desc = "Creates an users (if the user is admin)"
-    author = "ThePerkinrex"
+    author = "native"
     usage = "mkUser"
 
     def call(self, args=None):

@@ -6,14 +6,18 @@ class Help(Command):
 
     name = "help"
     desc = "Shows this help message"
-    author = "ThePerkinrex"
+    author = "native"
     usage = "help"
 
     @staticmethod
     def getHelpMsgs():
         msgs = []
         for cls in inherit.inheritors():
-            msg = cls.name + " > " + cls.desc + " - Command made by " + cls.author
+            msg = ''
+            if cls.author == 'native':
+                msg = cls.name + " > " + cls.desc
+            else:
+                msg = cls.name + " > " + cls.desc + " - Command made by " + cls.author
             msgs.append(msg)
 
         return msgs
@@ -25,7 +29,7 @@ class Help(Command):
         print("upDown > opens the game UpDown")
         print("balls > opens the game Balls")
         print("end > ends the os")
-        print("*mkUser > creates an users (if the user is admin)")
+        #print("*mkUser > creates an users (if the user is admin)")
         print("mkAdmin > Changes user rights (if the user is admin)")
         print("time > Prints the date and time")
         for msg in Help.getHelpMsgs():

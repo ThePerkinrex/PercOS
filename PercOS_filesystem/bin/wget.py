@@ -7,7 +7,7 @@ class Wget(Command):
     name = "wget"
     desc = "A command for downloading files from he internet"
     usage = "wget <url> [filename]"
-    author = "ThePerkinrex"
+    author = "native"
 
     def call(self, args=None):
         if args is None or len(args) == 0:

@@ -66,7 +66,7 @@ def ballsGame(user):
 def comm(command, usr, dire, percos):
 
     #loadcommands()
-    r = True
+    r = (True, 0)
     #if command == "calculator" or command == "calc":
     #        print("Abriendo la calculadora")
     #        calculator()
@@ -75,8 +75,10 @@ def comm(command, usr, dire, percos):
     elif command == "balls":
             ballsGame(usr)
     else:
-        if not loadcommands(command, dire, usr, percos):
-            r = False
+        l = loadcommands(command, dire, usr, percos)
+        if not l[0]:
+            r = (False, 0)
+        r = (r[0], l[1])
     return r
 
 
@@ -87,8 +89,10 @@ def loadcommands(comm, dire, usr, percos):
             #print("Author: " + cls.author + "\n")
             args.remove(args[0])
             c = cls(dire, usr, percos)
-            c.call(args)
+            ret = c.call(args)
             del c
-            return True
+            if ret is None:
+                ret = 0;
+            return (True, ret)
 
-    return False
+    return (False, 0)

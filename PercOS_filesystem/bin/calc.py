@@ -3,7 +3,7 @@ from command import Command
 class Calc(Command):
     name = "calculator|calc"
     desc = "Opens the calculator tool"
-    author = "ThePerkinrex"
+    author = "native"
     usage = "(calc|calculator)"
 
     def call(self, args=None):

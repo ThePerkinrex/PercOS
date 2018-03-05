@@ -23,6 +23,7 @@ class Command:
         print("Current dir: " + self.dire.dir)
         if not (args is None or args == ''):
             print("Some arguments were in the call: " + args)
+        return 0
 
     def getUsersInfo(self):
         return self.percos.getUsersInfo()

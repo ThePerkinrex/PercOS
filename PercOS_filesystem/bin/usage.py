@@ -6,7 +6,7 @@ class Usage(Command):
     name = "usage"
     desc = "Prints out the usage of a command"
     usage = "usage [command]"
-    author = "ThePerkinrex"
+    author = "native"
 
     def call(self, args=None):
         if len(args) == 0:
