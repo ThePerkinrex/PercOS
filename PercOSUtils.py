@@ -19,12 +19,14 @@ def printInit():
     print(decor("PercOS Utils " + version, 1))
 
 # Advanced input functions
-def getProbedInput(prompt, accepted):
+def getProbedInput(prompt, accepted, default=None):
     while True:
         value = input(prompt).lower()
 
         if value in accepted:
             return value
+        elif default is not None and value == '':
+            return default
         else:
             print(value + ' is not a valid response')
 
@@ -80,7 +82,7 @@ def dirdow(dir):
     r = concatDirs(ls)
     r.rstrip("/")
     return r
-        
+
 class Dire:
 
     def __init__(self, baseDir, usersDir, user):

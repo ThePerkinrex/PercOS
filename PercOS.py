@@ -5,6 +5,7 @@
 # Setup
 import PercOSApps as Apps
 import PercOSUtils as Utils
+from command import UsersInfo
 import AlgebraMathForPercOS as AMath
 from time import gmtime, strftime
 import os
@@ -51,16 +52,16 @@ class PercOS:
 
             # there are no users, first start menu
 
-            print("No hay usuarios registrados, creando el usuario inicial, que será admin")
+            print("There are no registered users, creating the inital user wich will be admin")
 
             # FIXME add a loop here
-            self.usr = input(" Nombre de usuario: ")
-            self.pas = input("        Contraseña: ")
-            double_pas = input("Repetir contraseña: ")
+            self.usr = input("Username: ")
+            self.pas = input("Password:  ")
+            double_pas = input("Repeat password: ")
             if double_pas == self.pas:
-                print("   Usuario: " + self.usr)
-                print("Contraseña: " + self.pas)
-                c = Utils.getProbedInput("Es esto correcto?(Y/n)", ["y", "n"])
+                print("    User: " + self.usr)
+                print("Password: " + self.pas)
+                c = Utils.getProbedInput("Is it correct?(Y/n): ", ["y", "n"], 'y')
                 if c == "y":
                     self.users.append(self.usr)
                     self.pases.append(self.pas)
@@ -75,9 +76,9 @@ class PercOS:
 
             tries = 3;
             while tries > 0:
-                print("Tienes " + tries.__str__() + " intentos.\n")
-                self.usr = input("Nombre de usuario: ")
-                self.pas = input("       Contraseña: ")
+                print("You have " + tries.__str__() + " tries.\n")
+                self.usr = input("Username: ")
+                self.pas = input("Password: ")
                 found = False
                 for i in range(len(self.users)):
                     if self.usr == self.users[i] and self.pas == self.pases[i]:
@@ -85,18 +86,18 @@ class PercOS:
                         break
                 if found:
                     if self.usr == '':
-                        print("Hola devUser")
+                        print("Hello devUser")
                         if self.usr in self.superusers:
-                            print('devUser - Eres administrador')
+                            print('devUser - You\'re admin')
                             # dire = dire + 'dev/'
                     else:
-                        print("Hola " + self.usr)
+                        print("Hello " + self.usr)
                         if self.usr in self.superusers:
-                            print(self.usr + ' - Eres administrador')
+                            print(self.usr + ' - You\'re admin')
                             # dire = dire + self.usr + '/'
                     break
                 else:
-                    print("Incorrecto")
+                    print("Incorrect")
                     tries -= 1
 
         if self.usr == '':
@@ -109,7 +110,6 @@ class PercOS:
 
     def getUsersInfo(self):
         r = None
-        print(self.usr, p.superusers)
         if self.usr in p.superusers:
             r = UsersInfo(self.users, self.pases, self.superusers, self.normalusers, self.perms)
         else:
@@ -156,9 +156,9 @@ class PercOS:
         #    return 0
         elif comm == "mkAdmin":
             if self.usr in self.superusers:
-                print('Cambiando permisos')
-                nUsr = Utils.getProbedInputNormal('Nombre de usuario >> ', self.users)
-                isSU = Utils.getProbedInput('Quieres que sea admin? (Y/n) ', ['y', 'n'])
+                print('Changing permissions')
+                nUsr = Utils.getProbedInputNormal('Username >> ', self.users)
+                isSU = Utils.getProbedInput('Do you want him to be admin? (Y/n) ', ['y', 'n'], 'y')
                 if isSU == 'y':
                     if nUsr not in self.superusers:
                         self.superusers.append(nUsr)
@@ -169,10 +169,10 @@ class PercOS:
                         self.superusers.remove(nUsr)
                 Utils.writeUsers(self.users, self.pases, self.superusers)
             else:
-                print('No tienes suficientes permisos para hacer esto')
+                print('You don\'t have enough permissions to do it)
             return 0
         elif comm == "end":
-            print("Terminando PercOS")
+            print("Endnig PercOS")
             return 1
         elif comm == "time":
             print(strftime("%a, %d %b %Y %H:%M:%S", gmtime()))
@@ -191,7 +191,7 @@ class PercOS:
             r = Apps.comm(comm, self.usr, self.dire, self)
 
             if not r:
-                print(comm + " no es un comando valido")
+                print(comm + " is not a valid command")
             return 0
 
     # Main Loop

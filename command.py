@@ -25,7 +25,7 @@ class Command:
             print("Some arguments were in the call: " + args)
 
     def getUsersInfo(self):
-        return percos.getUsersInfo()
+        return self.percos.getUsersInfo()
 
     def setUsersInfo(self, usersinfo):
-        return p.setUsersInfo(usersinfo)
+        return self.percos.setUsersInfo(usersinfo)

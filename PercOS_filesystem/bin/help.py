@@ -21,7 +21,7 @@ class Help(Command):
     def call(self, args=None):
         print("Command list")
         print("If the command has an asterisk, it's invalid")
-        print("calculator > opens the calculator, you can also use 'calc'")
+        #print("calculator > opens the calculator, you can also use 'calc'")
         print("upDown > opens the game UpDown")
         print("balls > opens the game Balls")
         print("end > ends the os")

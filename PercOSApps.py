@@ -20,46 +20,6 @@ def printInit():
 
 
 
-#Calculator
-def calculator():
-    def getInput(y):
-        if y==1:
-            x = input("Escribe el primer numero: ")
-        else:
-            x = input("Escribe el segundo numero: ")
-        return x
-
-
-    print("Opciones: ")
-    print("-Suma: escribe 'suma'")
-    print("-Resta: escribe 'resta'")
-    print("-Multiplicacion: escribe 'mult'")
-    print("-Division: escribe 'div'")
-    print("-Potencia: escribe 'pot', elevas el 1º nº al 2º")
-    print("-Cociente y resto de una division: escribe 'CoRe'")
-
-    sel = input("Selecciona una opcion: ")
-    result = 0
-    x = float(getInput(1))
-    y = float(getInput(2))
-    
-    if sel=="suma":
-        result = x + y
-    elif sel == "resta":
-        result = x - y
-    elif sel == "mult":
-        result = x * y
-    elif sel == "div":
-        result = x / y
-    elif sel == "pot":
-        result = x ** y
-    elif sel == "CoRe":
-        result = "Cociente: " + str(x // y) + "\nResto: " + str(x % y)
-    else:
-        print("Eso no es una opcion")
-    print(result)
-    state = 0
-
 
 #Up & Down game
 def upDownGame():
@@ -107,10 +67,10 @@ def comm(command, usr, dire, percos):
 
     #loadcommands()
     r = True
-    if command == "calculator" or command == "calc":
-            print("Abriendo la calculadora")
-            calculator()
-    elif command == "upDown":
+    #if command == "calculator" or command == "calc":
+    #        print("Abriendo la calculadora")
+    #        calculator()
+    if command == "upDown":
             upDownGame()
     elif command == "balls":
             ballsGame(usr)
@@ -123,7 +83,7 @@ def comm(command, usr, dire, percos):
 def loadcommands(comm, dire, usr, percos):
     for cls in inherit.inheritors():
         args = comm.split(" ")
-        if args[0] == cls.name:
+        if args[0] in cls.name.split('|'):
             #print("Author: " + cls.author + "\n")
             args.remove(args[0])
             c = cls(dire, usr, percos)
@@ -132,8 +92,3 @@ def loadcommands(comm, dire, usr, percos):
             return True
 
     return False
-
-
-
-
-
