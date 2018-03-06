@@ -11,6 +11,10 @@ class Help(Command):
 
     @staticmethod
     def getHelpMsgs():
+        """
+        A function that fetches the help messages from every command. \n
+        Returns a list with them
+        """
         msgs = []
         msgs.append('Native commands:')
         for cls in inherit.inheritors():
