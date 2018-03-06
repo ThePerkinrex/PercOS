@@ -1,6 +1,7 @@
 from command import Command
 from time import gmtime, strftime
 
+
 class Time(Command):
     name = "time"
     desc = "Shows the time"

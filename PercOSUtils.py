@@ -1,22 +1,26 @@
 
-#PercOS Utils
+# PercOS Utils
 
-#Setup
+# Setup
 import distutils.file_util as FUtil
 import os
 
 uFileName = "Users.prcdat"
 
-#Function for decoring messages
+
+# Function for decoring messages
 def decor(st, m):
     nhastag = 40
-    return ("\n" * m ) + ("#" * nhastag) + "#######################\n" + st + "\n" + ("#" * nhastag) + "#######################" + ("\n")
+    msg = ("\n" * m) + ("#" * nhastag + 23) + "\n" + st + "\n"
+    msg = msg + ("#" * nhastag + 23) + "\n"
+    return msg
 
 
-#Init Message
+# Init Message
 def printInit():
     version = "Alpha 1.1.0"
     print(decor("PercOS Utils " + version, 1))
+
 
 # Advanced input functions
 def getProbedInput(prompt, accepted, default=None):
@@ -40,7 +44,8 @@ def getProbedInputNormal(prompt, accepted):
         else:
             print(value + ' is not a valid response')
 
-#Function for writing to the users.prc file
+
+# Function for writing to the users.prc file
 def writeUsers(users, pases, superusers):
     f = open(uFileName, 'w')
     for user in users:
@@ -52,7 +57,8 @@ def writeUsers(users, pases, superusers):
         f.write(user + ',' + pas + ',' + perm + '\n')
     f.close()
 
-#function for making and writing files
+
+# function for making and writing files
 def mkFile(filename):
     lines = []
     while True:
@@ -63,17 +69,20 @@ def mkFile(filename):
             lines.append(line)
     FUtil.write_file(filename, lines)
 
+
 def concat(list):
     r = ""
     for s in list:
         r += s
     return r
 
+
 def concatDirs(list):
     r = ""
     for s in list:
         r += s + "/"
     return r
+
 
 def dirdow(dir):
     ls = dir.split("/")
@@ -82,6 +91,7 @@ def dirdow(dir):
     r = concatDirs(ls)
     r.rstrip("/")
     return r
+
 
 class Dire:
 
@@ -97,7 +107,7 @@ class Dire:
             else:
                 levdow = toGo.split("/").count("..")
                 i = 0
-                while i<levdow:
+                while i < levdow:
                     i += 1
                     self.dir = dirdow(self.dir)
                 self.realdir = os.getcwd() + "/" + self.bd + self.dir

@@ -1,4 +1,6 @@
 from command import Command
+import PercOSUtils as Utils
+
 
 class Balls(Command):
     name = "balls"
@@ -12,7 +14,7 @@ class Balls(Command):
         p2 = input("P1 > " + p1 + ", P2 > ")
         while True:
             print("There are " + str(nballs) + " balls")
-            P1in = int(Utils.getProbedInput(p1 + " > ", ["1","2"]))
+            P1in = int(Utils.getProbedInput(p1 + " > ", ["1", "2"]))
             if P1in == 1 or P1in == 2:
                 nballs -= P1in
                 if nballs == 0:

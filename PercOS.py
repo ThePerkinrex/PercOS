@@ -5,7 +5,8 @@
 # Setup
 import PercOSUtils as Utils
 from command import UsersInfo
-import os, inherit
+import os
+import inherit
 
 
 class PercOS:
@@ -47,8 +48,10 @@ class PercOS:
         if len(self.users) == 0:
 
             # there are no users, first start menu
+            r = "There are no registered users, "
+            r = r + 'creating the inital user wich will be admin'
 
-            print("There are no registered users, creating the inital user wich will be admin")
+            print(r)
 
             # FIXME add a loop here
             self.usr = input("Username: ")
@@ -57,7 +60,8 @@ class PercOS:
             if double_pas == self.pas:
                 print("    User: " + self.usr)
                 print("Password: " + self.pas)
-                c = Utils.getProbedInput("Is it correct?(Y/n): ", ["y", "n"], 'y')
+                c = Utils.getProbedInput("Is it correct?(Y/n): ", ["y", "n"],
+                                         'y')
                 if c == "y":
                     self.users.append(self.usr)
                     self.pases.append(self.pas)
@@ -70,7 +74,7 @@ class PercOS:
 
             # asking the user for credentials
 
-            tries = 3;
+            tries = 3
             while tries > 0:
                 print("You have " + tries.__str__() + " tries.\n")
                 self.usr = input("Username: ")
@@ -107,13 +111,16 @@ class PercOS:
     def getUsersInfo(self):
         r = None
         if self.usr in p.superusers:
-            r = UsersInfo(self.users, self.pases, self.superusers, self.normalusers, self.perms)
+            r = UsersInfo(self.users,
+                          self.pases,
+                          self.superusers,
+                          self.normalusers,
+                          self.perms)
         else:
             print('You can\'t do that')
         return r
 
     def setUsersInfo(self, usersinfo):
-        r = None
         if self.usr in self.superusers:
             self.superusers = usersinfo.superusers
             self.users = usersinfo.users
@@ -127,13 +134,12 @@ class PercOS:
         for cls in inherit.inheritors():
             args = comm.split(" ")
             if args[0] in cls.name.split('|'):
-                #print("Author: " + cls.author + "\n")
                 args.remove(args[0])
                 c = cls(dire, usr, percos)
                 ret = c.call(args)
                 del c
                 if ret is None:
-                    ret = 0;
+                    ret = 0
                 return (True, ret)
 
         return (False, 0)
@@ -143,7 +149,9 @@ class PercOS:
             if self.usr in self.superusers:
                 print('Changing permissions')
                 nUsr = Utils.getProbedInputNormal('Username >> ', self.users)
-                isSU = Utils.getProbedInput('Do you want him to be admin? (Y/n) ', ['y', 'n'], 'y')
+                isSU = Utils.getProbedInput(
+                                'Do you want him to be admin? (Y/n) ',
+                                ['y', 'n'], 'y')
                 if isSU == 'y':
                     if nUsr not in self.superusers:
                         self.superusers.append(nUsr)
@@ -156,14 +164,6 @@ class PercOS:
             else:
                 print('You don\'t have enough permissions to do it')
             return 0
-        #elif comm == "userPerms":
-        #    for user in self.users:
-        #        i = self.users.index(user)
-        #        if not user == '':
-        #            print(user + '\t>\t' + self.perms[i])
-        #        else:
-        #            print('devUser\t>\t' + self.perms[i])
-        #    return 0
         elif comm == "":
             return 0
         else:

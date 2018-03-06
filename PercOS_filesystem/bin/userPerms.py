@@ -1,5 +1,6 @@
 from command import Command
 
+
 class UserPerms(Command):
     name = "userPerms|perms"
     desc = "A command for viewing user permissions"

@@ -1,6 +1,7 @@
 from command import Command
 import random
 
+
 class UpDown(Command):
     name = 'upDown'
     desc = 'The upDown game'
@@ -8,7 +9,7 @@ class UpDown(Command):
     author = 'ThePerkinrex'
 
     def call(self, args=None):
-        x = random.randint(0,100)
+        x = random.randint(0, 100)
         print("Guess a number between 0 and 100")
         while True:
             y = int(input("Write the number you think: "))

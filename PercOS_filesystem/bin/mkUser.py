@@ -16,7 +16,8 @@ class MkUser(Command):
             print('')
             nUsr = input('Username >> ')
             nPas = input('Password >> ')
-            isSU = Utils.getProbedInput('Do you want to make admin? (Y/n) ', ['y', 'n'])
+            isSU = Utils.getProbedInput('Do you want to make admin? (Y/n) ',
+                                        ['y', 'n'])
             if isSU == 'y':
                 p.superusers.append(nUsr)
                 p.perms.append('1')

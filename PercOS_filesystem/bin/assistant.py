@@ -9,4 +9,3 @@ class Assistant(Command):
 
     def call(self, args=None):
         print("this is my assistant")
-

@@ -1,5 +1,6 @@
 from command import Command
 
+
 class Calc(Command):
     name = "calculator|calc"
     desc = "Opens the calculator tool"
@@ -8,12 +9,11 @@ class Calc(Command):
 
     def call(self, args=None):
         def getInput(y):
-            if y==1:
+            if y == 1:
                 x = input("Write the first number: ")
             else:
                 x = input("Write the second number: ")
             return x
-
 
         print("Options: ")
         print("-Add: write 'add'")
@@ -28,7 +28,7 @@ class Calc(Command):
         x = float(getInput(1))
         y = float(getInput(2))
 
-        if sel=="add":
+        if sel == "add":
             result = x + y
         elif sel == "sub":
             result = x - y
@@ -43,4 +43,3 @@ class Calc(Command):
         else:
             print("That's not an option")
         print(result)
-        state = 0

@@ -1,5 +1,6 @@
 from command import Command
 
+
 class Time(Command):
     name = "end"
     desc = "Ends PercOS"
