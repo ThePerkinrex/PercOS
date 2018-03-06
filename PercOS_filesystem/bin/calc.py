@@ -4,7 +4,7 @@ class Calc(Command):
     name = "calculator|calc"
     desc = "Opens the calculator tool"
     author = "native"
-    usage = "(calc|calculator)"
+    usage = "<calc|calculator>"
 
     def call(self, args=None):
         def getInput(y):

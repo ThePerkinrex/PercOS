@@ -5,7 +5,7 @@
 # Setup
 import PercOSUtils as Utils
 from command import UsersInfo
-import os
+import os, inherit
 
 
 class PercOS:
@@ -123,7 +123,7 @@ class PercOS:
         else:
             print('You can\'t do that')
 
-    def loadcommands(comm, dire, usr, percos):
+    def loadcommands(percos, comm, dire, usr):
         for cls in inherit.inheritors():
             args = comm.split(" ")
             if args[0] in cls.name.split('|'):
@@ -156,18 +156,18 @@ class PercOS:
             else:
                 print('You don\'t have enough permissions to do it')
             return 0
-        elif comm == "userPerms":
-            for user in self.users:
-                i = self.users.index(user)
-                if not user == '':
-                    print(user + ' ' + self.perms[i])
-                else:
-                    print('devUser ' + self.perms[i])
-            return 0
+        #elif comm == "userPerms":
+        #    for user in self.users:
+        #        i = self.users.index(user)
+        #        if not user == '':
+        #            print(user + '\t>\t' + self.perms[i])
+        #        else:
+        #            print('devUser\t>\t' + self.perms[i])
+        #    return 0
         elif comm == "":
             return 0
         else:
-            r = loadcommands(comm, self.usr, self.dire, self)
+            r = self.loadcommands(comm, self.usr, self.dire)
 
             if not r[0]:
                 print(comm + " is not a valid command")
