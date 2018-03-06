@@ -9,4 +9,3 @@ class Time(Command):
 
     def call(self, args=None):
         print(strftime("%a, %d %b %Y %H:%M:%S", gmtime()))
-        return self.execute('end')

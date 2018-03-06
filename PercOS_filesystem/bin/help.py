@@ -12,14 +12,17 @@ class Help(Command):
     @staticmethod
     def getHelpMsgs():
         msgs = []
+        msgs.append('Native commands:')
         for cls in inherit.inheritors():
-            msg = ''
             if cls.author == 'native':
-                msg = cls.name + " > " + cls.desc
-            else:
-                msg = cls.name + " > " + cls.desc + " - Command made by " + cls.author
-            msgs.append(msg)
-
+                msg = ' -   ' + cls.name + " > " + cls.desc
+                msgs.append(msg)
+        msgs.append('')
+        msgs.append('Custom commands:')
+        for cls in inherit.inheritors():
+            if cls.author != 'native':
+                msg = ' +   ' + cls.name + " > " + cls.desc + " - Command made by " + cls.author
+                msgs.append(msg)
         return msgs
 
     def call(self, args=None):
@@ -28,9 +31,10 @@ class Help(Command):
         #print("calculator > opens the calculator, you can also use 'calc'")
         print("upDown > opens the game UpDown")
         print("balls > opens the game Balls")
-        print("end > ends the os")
+        #print("end > ends the os")
         #print("*mkUser > creates an users (if the user is admin)")
         print("mkAdmin > Changes user rights (if the user is admin)")
-        print("time > Prints the date and time")
+        print('')
+        #print("time > Prints the date and time")
         for msg in Help.getHelpMsgs():
             print(msg)

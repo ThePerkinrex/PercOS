@@ -3,10 +3,8 @@
 # PercOS Main Script
 
 # Setup
-import PercOSApps as Apps
 import PercOSUtils as Utils
 from command import UsersInfo
-import AlgebraMathForPercOS as AMath
 import os
 
 
@@ -29,7 +27,6 @@ class PercOS:
         version = "Alpha 1.2.0"
         print(Utils.decor("PercOS " + version, 60))
         Utils.printInit()
-        Apps.printInit()
         # AMath.printInit()
 
     def getUsers(self):
@@ -126,6 +123,21 @@ class PercOS:
         else:
             print('You can\'t do that')
 
+    def loadcommands(comm, dire, usr, percos):
+        for cls in inherit.inheritors():
+            args = comm.split(" ")
+            if args[0] in cls.name.split('|'):
+                #print("Author: " + cls.author + "\n")
+                args.remove(args[0])
+                c = cls(dire, usr, percos)
+                ret = c.call(args)
+                del c
+                if ret is None:
+                    ret = 0;
+                return (True, ret)
+
+        return (False, 0)
+
     def callcomm(self, comm):
         if comm == "mkAdmin":
             if self.usr in self.superusers:
@@ -155,7 +167,7 @@ class PercOS:
         elif comm == "":
             return 0
         else:
-            r = Apps.comm(comm, self.usr, self.dire, self)
+            r = loadcommands(comm, self.usr, self.dire, self)
 
             if not r[0]:
                 print(comm + " is not a valid command")
