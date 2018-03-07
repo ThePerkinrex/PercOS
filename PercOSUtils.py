@@ -102,22 +102,48 @@ class Dire:
         self.realdir = os.getcwd() + "/" + baseDir + self.dir
         self.bd = baseDir
 
-    def cd(self, toGo):
-        if ".." in toGo:
-            if toGo.startswith("/"):
-                print("Can't go lower than the base directory.")
-            else:
-                levdow = toGo.split("/").count("..")
-                i = 0
-                while i < levdow:
-                    i += 1
-                    self.dir = dirdow(self.dir)
-                self.realdir = os.getcwd() + "/" + self.bd + self.dir
+    def cd(self, toGo, simbolic):
+        if simbolic:
+            r = Dire('', '', '')
+            r.bd = self.bd
+            r.realdir = self.realdir
+            r.dir = self.dir
 
-        else:
-            if toGo.startswith("/"):
-                self.dir = toGo
-                self.realdir = os.getcwd() + "/" + self.bd + self.dir
+            if ".." in toGo:
+                if toGo.startswith("/"):
+                    print("Can't go lower than the base directory.")
+                else:
+                    levdow = toGo.split("/").count("..")
+                    i = 0
+                    while i < levdow:
+                        i += 1
+                        r.dir = dirdow(r.dir)
+                    r.realdir = os.getcwd() + "/" + r.bd + r.dir
+
             else:
-                self.dir = self.dir + "/" + toGo
-                self.realdir = os.getcwd() + "/" + self.bd + self.dir
+                if toGo.startswith("/"):
+                    r.dir = toGo
+                    r.realdir = os.getcwd() + "/" + r.bd + r.dir
+                else:
+                    r.dir = r.dir + "/" + toGo
+                    r.realdir = os.getcwd() + "/" + r.bd + r.dir
+            return r
+        else:
+            if ".." in toGo:
+                if toGo.startswith("/"):
+                    print("Can't go lower than the base directory.")
+                else:
+                    levdow = toGo.split("/").count("..")
+                    i = 0
+                    while i < levdow:
+                        i += 1
+                        self.dir = dirdow(self.dir)
+                    self.realdir = os.getcwd() + "/" + self.bd + self.dir
+
+            else:
+                if toGo.startswith("/"):
+                    self.dir = toGo
+                    self.realdir = os.getcwd() + "/" + self.bd + self.dir
+                else:
+                    self.dir = self.dir + "/" + toGo
+                    self.realdir = os.getcwd() + "/" + self.bd + self.dir

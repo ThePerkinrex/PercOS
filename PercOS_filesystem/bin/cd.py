@@ -1,4 +1,5 @@
 from command import Command
+from os import path
 
 
 class cd(Command):
@@ -11,4 +12,11 @@ class cd(Command):
         if len(args) == 0:
             print('I need at least the place to go to work')
         else:
-            self.dire.cd(args[0])
+            toGo = self.dire.cd(args[0], True)
+            if path.exists(toGo.realdir):
+                if path.isdir(toGo.realdir):
+                    self.dire.cd(args[0], False)
+                else:
+                    print('That isn\'t a directory')
+            else:
+                print('That doesn\'t exist')
