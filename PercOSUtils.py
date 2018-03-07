@@ -11,8 +11,8 @@ uFileName = "Users.prcdat"
 # Function for decoring messages
 def decor(st, m):
     nhastag = 40
-    msg = ("\n" * m) + ("#" * nhastag + 23) + "\n" + st + "\n"
-    msg = msg + ("#" * nhastag + 23) + "\n"
+    msg = ("\n" * m) + ("#" * (nhastag + 23)) + "\n" + st + "\n"
+    msg = msg + ("#" * (nhastag + 23)) + "\n"
     return msg
 
 
@@ -85,11 +85,13 @@ def concatDirs(list):
 
 
 def dirdow(dir):
+    print('dir:', dir)
     ls = dir.split("/")
-    ls.remove("")
+    # ls.remove("")
     ls.pop()
     r = concatDirs(ls)
-    r.rstrip("/")
+    # print('r:', type(r))
+    r = r.rstrip('/')
     return r
 
 
@@ -102,7 +104,7 @@ class Dire:
 
     def cd(self, toGo):
         if ".." in toGo:
-            if toGo.startsWith("/"):
+            if toGo.startswith("/"):
                 print("Can't go lower than the base directory.")
             else:
                 levdow = toGo.split("/").count("..")
@@ -113,7 +115,7 @@ class Dire:
                 self.realdir = os.getcwd() + "/" + self.bd + self.dir
 
         else:
-            if toGo.startsWith("/"):
+            if toGo.startswith("/"):
                 self.dir = toGo
                 self.realdir = os.getcwd() + "/" + self.bd + self.dir
             else:

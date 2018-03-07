@@ -16,7 +16,7 @@ class PercOS:
         self.usr = ""
         self.pas = ""
         self.nUsr = False
-        self.dire = Utils.Dire
+        self.dire = None
         self.users = []
         self.superusers = []
         self.normalusers = []
@@ -101,12 +101,12 @@ class PercOS:
                     tries -= 1
 
         if self.usr == '':
-            dire = Utils.Dire("PercOS_filesystem", "users", 'dev')
+            self.dire = Utils.Dire("PercOS_filesystem", "users", 'dev')
         else:
-            dire = Utils.Dire("PercOS_filesystem", "users", self.usr)
+            self.dire = Utils.Dire("PercOS_filesystem", "users", self.usr)
 
         if self.nUsr:
-            os.mkdir(dire.realdir)
+            os.mkdir(self.dire.realdir)
 
     def getUsersInfo(self):
         r = None
@@ -130,7 +130,7 @@ class PercOS:
         else:
             print('You can\'t do that')
 
-    def loadcommands(percos, comm, dire, usr):
+    def loadcommands(percos, comm, usr, dire):
         for cls in inherit.inheritors():
             args = comm.split(" ")
             if args[0] in cls.name.split('|'):

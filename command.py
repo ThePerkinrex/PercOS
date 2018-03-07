@@ -10,9 +10,9 @@ class UsersInfo:
 
 class Command:
     name = None
-    desc = None
+    desc = "The description of this command hasn't been implemented yet"
     usage = "The usage for this command hasn't been implemented yet"
-    author = None
+    author = "an anonymous user"
 
     def __init__(self, dire, usr, percos):
         self.dire = dire
@@ -23,8 +23,10 @@ class Command:
         print("""This command hasn't been implemented yet,
          if you think this is an error contact the command author""")
         print("Current dir: " + self.dire.dir)
+        print("Real dir: " + self.dire.realdir)
+        print("Base dir: " + self.dire.bd)
         if not (args is None or args == ''):
-            print("Some arguments were in the call: " + args)
+            print("Some arguments were in the call: " + str(args))
         return 0
 
     def execute(self, comm):
