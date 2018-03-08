@@ -1,6 +1,7 @@
 from command import Command
 import PercOSUtils as Utils
 import os
+import getpass
 
 
 class MkUser(Command):
@@ -15,7 +16,7 @@ class MkUser(Command):
             print('Creating new user')
             print('')
             nUsr = input('Username >> ')
-            nPas = input('Password >> ')
+            nPas = getpass.getpass(prompt='Password >> ')
             isSU = Utils.getProbedInput('Do you want to make admin? (Y/n) ',
                                         ['y', 'n'])
             if isSU == 'y':

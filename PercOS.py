@@ -7,6 +7,7 @@ import PercOSUtils as Utils
 from command import UsersInfo
 import os
 import inherit
+import getpass
 
 
 class PercOS:
@@ -55,7 +56,7 @@ class PercOS:
 
             # FIXME add a loop here
             self.usr = input("Username: ")
-            self.pas = input("Password:  ")
+            self.pas = getpass.getpass(prompt="Password: ")
             double_pas = input("Repeat password: ")
             if double_pas == self.pas:
                 print("    User: " + self.usr)
@@ -78,7 +79,7 @@ class PercOS:
             while tries > 0:
                 print("You have " + tries.__str__() + " tries.\n")
                 self.usr = input("Username: ")
-                self.pas = input("Password: ")
+                self.pas = getpass.getpass(prompt="Password: ")
                 found = False
                 for i in range(len(self.users)):
                     if self.usr == self.users[i] and self.pas == self.pases[i]:
