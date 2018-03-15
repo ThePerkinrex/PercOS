@@ -85,7 +85,7 @@ def concatDirs(list):
 
 
 def dirdow(dir):
-    print('dir:', dir)
+    # print('dir:', dir)
     ls = dir.split("/")
     # ls.remove("")
     ls.pop()
