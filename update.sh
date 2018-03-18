@@ -3,7 +3,8 @@ curl https://codeload.github.com/ThePerkinrex/PercScript/zip/master --output tmp
 echo "Installing Percscript"
 unzip -u tmp.zip -x '*.md' '*.png' '*/LICENSE' '*/.gitignore' '*/Example.plang'
 rm tmp.zip
-rm -r PercScript/*
+rm -r PercScript/
+mkdir PercScript
 cp -R PercScript-master/* PercScript/
 rm -r PercScript-master
 echo "PercScript done"
