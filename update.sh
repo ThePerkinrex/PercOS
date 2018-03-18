@@ -6,3 +6,10 @@ rm tmp.zip
 cp -R PercScript-master/* PercScript/
 rm -r PercScript-master
 echo "PercScript done"
+
+
+
+echo "Pushing the updates"
+git add *
+git commit -m "Get update packages"
+git push
