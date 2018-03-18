@@ -10,6 +10,9 @@ echo "PercScript done"
 
 
 echo "Pushing the updates"
+echo "Adding *"
 git add *
+echo "Commiting as \"Get update packages\""
 git commit -m "Get update packages"
+echo "Pushing"
 git push
