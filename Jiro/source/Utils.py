@@ -18,17 +18,16 @@ class LogColors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-def psinit():
-    print(LogColors.SETUP + "\n\n ################### - WELCOME TO - ###################")
-    print(" #                                                    #")
-    print(" #   ____               ____            _       _     #")
-    print(" #  |  _ \ ___ _ __ ___/ ___|  ___ _ __(_)_ __ | |_   #")
-    print(" #  | |_) / _ \ '__/ __\___ \ / __| '__| | '_ \| __|  #")
-    print(" #  |  __/  __/ | | (__ ___) | (__| |  | | |_) | |_   #")
-    print(" #  |_|   \___|_|  \___|____/ \___|_|  |_| .__/ \__|  #")
-    print(" #                                       |_|          #")
-    print(" #                                                    #")
-    print(" ######################################################\n\n" + LogColors.ENDC)
+def jr_init():
+    print(LogColors.SETUP + "\n\n #### - WELCOME TO - ####")
+    print(" #                      #")
+    print(" #       _ _            #")
+    print(" #      | (_)_ __ ___   #")
+    print(" #   _  | | | '__/ _ \  #")
+    print(" #  | |_| | | | | (_) | #")
+    print(" #   \___/|_|_|  \___/  #")
+    print(" #                      #")
+    print(" ########################\n\n" + LogColors.ENDC)
 
 def listtostring(mylist):
     r = "["
@@ -43,9 +42,9 @@ def print_script(printfunc, verbose, script):
         printfunc(verbose, str(i) + ':\t', line.strip('\n'))
 
 
-def ps_help(invokeName):
-    print("------------| PercScript Help |------------")
-    print(invokeName + " <filepath> -> run the PercScript file in <filepath>")
+def jr_help(invokeName):
+    print("------------| Jiro Help |------------")
+    print(invokeName + " <filepath> -> run the Jiro file in <filepath>")
     print(invokeName + " -> print this help message")
     print(invokeName + " -h -> print this help message")
     print("\n\n")
@@ -78,7 +77,7 @@ def replace_regex(base: str, regex: str, replacing: str):
     return None
 
 
-def val_to_ps(val):
+def val_to_jr(val):
     if type(val) == str:
         return str('"' + val + '"')
     elif type(val) == float:
@@ -106,12 +105,12 @@ def tokenize(s: str, text, line, localvar, localval, parser=None):
         if m:
             # print(m.group(0))
             if parser and m.group(0) in parser.variables:
-                s = s.replace(m.group(0), val_to_ps(parser.getval(m.group(0))))
+                s = s.replace(m.group(0), val_to_jr(parser.getval(m.group(0))))
 
             if m.group(0) in localvar:
                 val = localval[localvar.index(m.group(0))]
                 log(verbose, m.group(0), localvar, val)
-                s = s.replace(m.group(0), val_to_ps(val))
+                s = s.replace(m.group(0), val_to_jr(val))
     log(verbose, 'TOKEN:', s)
     for token in Tokens.valid_token_literals:
         m = re.search('^' + token[0] + '$', s)

@@ -1,4 +1,4 @@
-# PercScript Parser V1.1.0-alpha
+# Jiro Parser V1.1.0-alpha
 import re
 
 import Utils
@@ -14,14 +14,14 @@ class Parser:
 
     functions = [("print", 1)]  # Function names and nº of args
     arguments = [['toPrint']]  # Function arguments names
-    codes = [("perc.lang.print", -1, -1)]  # Function codes and location in file
+    codes = [("jiro.lang.print", -1, -1)]  # Function codes and location in file
     variables = ["plang"] # Variable names
-    values = ["PercScript for Perk!"]  # Variable values
+    values = ["Jiro for Perk!"]  # Variable values
     script = []  # The script to run
 
     def __init__(self, verbose):
         self.verbose = verbose
-        log(self.verbose, "PercScript Parser V" + self.V + "\n\n\n")
+        log(self.verbose, "Jiro Parser V" + self.V + "\n\n\n")
 
 # V ----FUNCTIONS---- V
 
@@ -87,7 +87,7 @@ class Parser:
         if m:
             # print('A variable!')
             if val in self.variables:
-                return self.get_type(Utils.val_to_ps(self.getval(val)), line, localvar, localval)
+                return self.get_type(Utils.val_to_jr(self.getval(val)), line, localvar, localval)
             else:
                 error(val + " is not a registered variable", self.script[line - 1], line)
         if not m:
@@ -148,10 +148,10 @@ class Parser:
         if not m:
             error(val + " is not a registered variable", self.script[line-1], line)
 
-    def ps_function(self, name, args):  # Parse a function call
+    def jr_function(self, name, args):  # Parse a function call
         log(self.verbose, "calling function " + name + " with arguments " + str(args))
         code = self.getcode(name, args)
-        if code[0].startswith("perc.lang"):
+        if code[0].startswith("jiro.lang"):
             Utils.call_native(name, args)
         else:
             self.parse_func(self.getfunction(name, args), False, self.get_args(name, args), args)
@@ -165,7 +165,7 @@ class Parser:
                 arg = arg.strip(' ')
                 argspass.append(self.detect_val(arg, line, localvar, localval))
             #print(line, name, argspass, '->')
-            self.ps_function(name, argspass)
+            self.jr_function(name, argspass)
         else:
             func = str(self.script[line - 1].strip('\n'))
             for arg in args:
