@@ -1,13 +1,13 @@
-echo "Downloading PercScript"
-curl https://codeload.github.com/ThePerkinrex/PercScript/zip/master --output tmp.zip
-echo "Installing Percscript"
-unzip -u tmp.zip -x '*.md' '*.png' '*/LICENSE' '*/.gitignore' '*/Example.plang'
+echo "Downloading Jiro"
+curl https://codeload.github.com/ThePerkinrex/Jiro/zip/master --output tmp.zip
+echo "Installing Jiro"
+unzip -u tmp.zip -x '*.md' '*.png' '*/LICENSE' '*/.gitignore' '*/Example.jr'
 rm tmp.zip
-rm -r PercScript/
-mkdir PercScript
-cp -R PercScript-master/* PercScript/
-rm -r PercScript-master
-echo "PercScript done"
+rm -r Jiro/
+mkdir Jiro
+cp -R Jiro-master/* Jiro/
+rm -r Jiro-master
+echo "Jiro done"
 
 
 
