@@ -1,7 +1,7 @@
 echo "Downloading Jiro"
 curl https://codeload.github.com/ThePerkinrex/Jiro/zip/master --output tmp.zip
 echo "Installing Jiro"
-unzip -u tmp.zip -x '*.md' '*.png' '*/LICENSE' '*/.gitignore' '*/[Ee]xample.jr'
+unzip -u tmp.zip -x '*.md' '*.png' '*/LICENSE' '*/.gitignore' '*/[Ee]xample.jr' '*/install-jiro.sh' '*/uninstall-jiro.sh'
 rm tmp.zip
 rm -r Jiro/
 mkdir Jiro
