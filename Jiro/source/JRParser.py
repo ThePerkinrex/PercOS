@@ -1,4 +1,4 @@
-# Jiro Parser V1.1.0-alpha
+# Jiro Parser v1.1.1
 import re
 
 import Utils
@@ -10,18 +10,31 @@ import Tokens
 
 
 class Parser:
-    V = "1.1.0-alpha"
+    V = "1.1.1"
 
     functions = [("print", 1)]  # Function names and nº of args
     arguments = [['toPrint']]  # Function arguments names
     codes = [("jiro.lang.print", -1, -1)]  # Function codes and location in file
-    variables = ["plang"] # Variable names
+    variables = ["jr"] # Variable names
     values = ["Jiro for Perk!"]  # Variable values
     script = []  # The script to run
 
-    def __init__(self, verbose):
+    def __init__(self, verbose, funcs=[], vars=[]):
+        # Func in funcs Structure:
+        #     (function-name, function-argument-list, function-handler)
+        #     function-handler is a function with an argument
+        #                       that argument is a dict with the (key: value)
+        # Var in vars Structure:
+        #     (variable-name, variable-value)
         self.verbose = verbose
         log(self.verbose, "Jiro Parser V" + self.V + "\n\n\n")
+        for var in vars:
+            self.variables.append(var[0])
+            self.values.append(var[1])
+        for func in funcs:
+            self.functions.append((func[0], len(func[1])))
+            self.arguments.append(func[1])
+            self.codes.append(("jiro.extension." + func[0], -1, -1, func[2]))
 
 # V ----FUNCTIONS---- V
 
@@ -153,6 +166,8 @@ class Parser:
         code = self.getcode(name, args)
         if code[0].startswith("jiro.lang"):
             Utils.call_native(name, args)
+        elif code[0].startswith("jiro.extension"):
+            code[3](Utils.create_dict(self.get_args(name, args), args))
         else:
             self.parse_func(self.getfunction(name, args), False, self.get_args(name, args), args)
 

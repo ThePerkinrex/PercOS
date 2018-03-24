@@ -125,3 +125,13 @@ def tokenize(s: str, text, line, localvar, localval, parser=None):
     if t is None:
         error(str(s) + ' is not a valid token', text, line)
     return t
+
+def create_dict(keys, values):
+    r = {}
+    if len(keys) != len(values):
+        raise ValueError("Keys and Values have to be the same lenght")
+    i = 0
+    while i < keys:
+        r[keys[i]] = values[i]
+        i += 1
+    return r

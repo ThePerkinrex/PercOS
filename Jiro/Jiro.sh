@@ -1,5 +1,6 @@
-if [ "`stat source/PercScript.py | grep -o x`" == "" ]; then
-  chmod +x source/PercScript.py
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+if [ "`stat $SCRIPTPATH/source/Jiro.py | grep -o x`" == "" ]; then
+  chmod +x $SCRIPTPATH/source/Jiro.py
 fi
 
-./source/PercScript.py "$@"
+$SCRIPTPATH/source/Jiro.py "$@"
