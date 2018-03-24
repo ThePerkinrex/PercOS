@@ -14,8 +14,7 @@ echo "Jiro done"
 echo "Pushing the updates"
 echo "Adding ."
 git add .
-echo "$@"
-if [ "$1" != "" ]; then
+if [ "$@" != "" ]; then
   echo "Commiting as \"$@\""
   git commit -m "$1"
 else
