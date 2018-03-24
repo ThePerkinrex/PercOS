@@ -14,7 +14,13 @@ echo "Jiro done"
 echo "Pushing the updates"
 echo "Adding ."
 git add .
-echo "Commiting as \"Get update packages\""
-git commit -m "Get update packages"
+
+if [ "$1" != "" ]; then
+  echo "Commiting as \"$1\""
+  git commit -m "$1"
+else
+  echo "Commiting as \"Get update packages\""
+  git commit -m "Get update packages"
+fi
 echo "Pushing"
 git push
